@@ -1,12 +1,31 @@
 import unittest
+
 from app.utils.observer import Observer, Subject
 
 
-class TestObserver(Observer):
+class TestSubject(Subject):
     def __init__(self) -> None:
-        self._value: int | None = None
+        super().__init__()
+        self._value: int = 0
 
-    def update(self, subject: Subject) -> None:
+    def triggerAddEvent(self) -> None:
+        self._value += 1
+        self.notify("add")
+
+    def triggerSubEvent(self) -> None:
+        self._value -= 1
+        self.notify("sub")
+
+    @property
+    def value(self):
+        return self._value
+
+
+class TestEventBlindObserver(Observer):
+    def __init__(self) -> None:
+        self._value: int = 0
+
+    def update(self, subject: TestSubject, event_name: str) -> None:
         self.value = subject.value
 
     @property
@@ -18,32 +37,37 @@ class TestObserver(Observer):
         self._value = new_value
 
 
-class TestSubject(Subject):
-    def __init__(self) -> None:
-        super().__init__()
-        self._value: int = 0
-
-    def triggerEvent(self) -> None:
-        self._value += 1
-        self.notify()
-
-    @property
-    def value(self):
-        return self._value
+class TestEventWatchingObserver(TestEventBlindObserver):
+    def update(self, subject: TestSubject, event_name: str) -> None:
+        if event_name == "add":
+            self._value += 1
+        elif event_name == "sub":
+            self._value -= 1
 
 
 class ObserverTests(unittest.TestCase):
-    def test_notifications(self):
-        observer = TestObserver()
+    def test_blind_notifications(self):
+        observer = TestEventBlindObserver()
         subject = TestSubject()
-
-        self.assertIsNone(observer.value)
-
         subject.attach(observer)
-        subject.triggerEvent()
 
+        self.assertEqual(observer.value, 0)
+
+        subject.triggerAddEvent()
         self.assertEqual(observer.value, 1)
 
+        subject.triggerSubEvent()
+        self.assertEqual(observer.value, 0)
 
-if __name__ == "__main__":
-    unittest.main()
+    def test_notification_descriptions(self):
+        observer = TestEventWatchingObserver()
+        subject = TestSubject()
+        subject.attach(observer)
+
+        self.assertEqual(observer.value, 0)
+
+        subject.triggerAddEvent()
+        self.assertEqual(observer.value, 1)
+
+        subject.triggerSubEvent()
+        self.assertEqual(observer.value, 0)

@@ -4,7 +4,7 @@ from typing import Protocol
 
 
 class Observer(Protocol):
-    def update(self, subject) -> None:
+    def update(self, subject, event_name: str) -> None:
         pass
 
 
@@ -20,7 +20,7 @@ class Subject:
         with suppress(ValueError):
             self._observers.remove(observer)
 
-    def notify(self, modifier: Observer | None = None) -> None:
+    def notify(self, event_name: str = "", modifier: Observer | None = None) -> None:
         for observer in self._observers:
             if modifier != observer:
-                observer.update(self)
+                observer.update(self, event_name)
