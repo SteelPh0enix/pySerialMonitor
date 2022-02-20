@@ -10,11 +10,11 @@ class TestSubject(Subject):
 
     def triggerAddEvent(self) -> None:
         self._value += 1
-        self.notify("add")
+        self.notify({"event_name": "add"})
 
     def triggerSubEvent(self) -> None:
         self._value -= 1
-        self.notify("sub")
+        self.notify({"event_name": "sub"})
 
     @property
     def value(self):
@@ -25,7 +25,7 @@ class TestEventBlindObserver(Observer):
     def __init__(self) -> None:
         self._value: int = 0
 
-    def update(self, subject: TestSubject, event_name: str) -> None:
+    def update(self, subject: TestSubject, event_data: dict) -> None:
         self.value = subject.value
 
     @property
@@ -38,10 +38,10 @@ class TestEventBlindObserver(Observer):
 
 
 class TestEventWatchingObserver(TestEventBlindObserver):
-    def update(self, subject: TestSubject, event_name: str) -> None:
-        if event_name == "add":
+    def update(self, subject: TestSubject, event_data: dict) -> None:
+        if event_data["event_name"] == "add":
             self._value += 1
-        elif event_name == "sub":
+        elif event_data["event_name"] == "sub":
             self._value -= 1
 
 
