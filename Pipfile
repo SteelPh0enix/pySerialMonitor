@@ -6,6 +6,7 @@ name = "pypi"
 [packages]
 sanic = "~=21.12"
 pyserial = "~=3.5"
+schedule = "~=1.1"
 
 [dev-packages]
 black = "*"

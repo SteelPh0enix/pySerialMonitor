@@ -9,11 +9,15 @@ class DataBufferWatcher(Observer):
     def __init__(self) -> None:
         super().__init__()
         self.data: list = []
+        self.data_from_last_notification: list = []
+        self.amount_of_values_last_notified: int = 0
 
-    def update(self, subject, event_name: str) -> None:
-        if event_name == "newdata":
-            self.data = subject.data
-        elif event_name == "clear":
+    def update(self, subject, event_data: dict) -> None:
+        if event_data["event_name"] == "newdata":
+            self.data_from_last_notification = event_data["new_values"]
+            self.amount_of_values_last_notified = len(event_data["new_values"])
+            self.data += self.data_from_last_notification
+        elif event_data["event_name"] == "clear":
             self.data.clear()
 
 
@@ -76,25 +80,41 @@ class DataBufferTests(unittest.TestCase):
         self.assertEqual(buffer.length, 6)
 
     def test_data_notification_event_new_value(self):
-        test_data = "test string"
+        test_data_a = "test string"
+        test_data_b = "another test string"
+        test_data = [test_data_a, test_data_b]
 
         buffer = DataBuffer()
         buffer_watcher = DataBufferWatcher()
         buffer.attach(buffer_watcher)
 
-        buffer.add_value(test_data)
+        buffer.add_value(test_data_a)
+        self.assertListEqual(buffer_watcher.data_from_last_notification, [test_data_a])
+        self.assertEqual(buffer_watcher.amount_of_values_last_notified, 1)
+
+        buffer.add_value(test_data_b)
+        self.assertListEqual(buffer_watcher.data_from_last_notification, [test_data_b])
+        self.assertEqual(buffer_watcher.amount_of_values_last_notified, 1)
 
         self.assertListEqual(buffer.data, buffer_watcher.data)
-        self.assertListEqual(buffer_watcher.data, [test_data])
+        self.assertListEqual(buffer_watcher.data, test_data)
 
     def test_data_notification_event_new_values(self):
-        test_data = [1, 2, 3, 4, 5]
+        test_data_a = [1, 2, 3]
+        test_data_b = [4, 5]
+        test_data = test_data_a + test_data_b
 
         buffer = DataBuffer()
         buffer_watcher = DataBufferWatcher()
         buffer.attach(buffer_watcher)
 
-        buffer.add_values(test_data)
+        buffer.add_values(test_data_a)
+        self.assertListEqual(buffer_watcher.data_from_last_notification, test_data_a)
+        self.assertEqual(buffer_watcher.amount_of_values_last_notified, len(test_data_a))
+
+        buffer.add_values(test_data_b)
+        self.assertListEqual(buffer_watcher.data_from_last_notification, test_data_b)
+        self.assertEqual(buffer_watcher.amount_of_values_last_notified, len(test_data_b))
 
         self.assertListEqual(buffer.data, buffer_watcher.data)
         self.assertListEqual(buffer_watcher.data, test_data)
