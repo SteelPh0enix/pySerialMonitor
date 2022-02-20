@@ -10,10 +10,11 @@ class DataBufferWatcher(Observer):
         super().__init__()
         self.data: list = []
         self.data_from_last_notification: list = []
-        self.amount_of_values_last_notified: int = 0
+        self.amount_of_values_last_notified: int = None
 
     def update(self, subject, event_data: dict) -> None:
         if event_data["event_name"] == "newdata":
+            # Save all the data related to notification
             self.data_from_last_notification = event_data["new_values"]
             self.amount_of_values_last_notified = len(event_data["new_values"])
             self.data += self.data_from_last_notification
@@ -25,8 +26,11 @@ class DataBufferTests(unittest.TestCase):
     def test_buffer_creating(self):
         buffer = DataBuffer()
 
+        # The list should be empty, and notifications should be performed instantly, every added value
         self.assertEqual(buffer.length, 0)
         self.assertListEqual(buffer.data, [])
+        self.assertEqual(buffer.notification_values_threshold, 1)
+        self.assertTrue(buffer.are_notifications_instant)
 
     @parameterized.expand(
         [
@@ -40,6 +44,7 @@ class DataBufferTests(unittest.TestCase):
     ):
         buffer = DataBuffer()
 
+        # Test both methods of adding collection of values to the buffer
         buffer.add_values(values_first)
         buffer += values_second
 
@@ -53,31 +58,48 @@ class DataBufferTests(unittest.TestCase):
         ]
     )
     def test_adding_new_values_to_buffer(
-        self, type_name, value_first, value_second, value_third, expected_result
+        self, _, value_first, value_second, value_third, expected_result
     ):
         buffer = DataBuffer()
 
+        # Check method of adding single value to the buffer
         buffer.add_value(value_first)
         buffer.add_value(value_second)
         buffer.add_value(value_third)
 
         self.assertEqual(buffer.data, expected_result)
 
-    def test_clearing_buffered_data(self):
+    @parameterized.expand(
+        [
+            ("0", ""),
+            ("1", "a"),
+            ("2", "abc"),
+            ("3", "123123qweqewasdasdzccz"),
+        ]
+    )
+    def test_clearing_buffered_data(self, _, test_data):
         buffer = DataBuffer()
-        buffer += "abcdef"
-
-        self.assertEqual(buffer.length, 6)
+        buffer += test_data
 
         buffer.clear()
 
+        # Check if the data has been cleared
         self.assertEqual(buffer.length, 0)
 
-    def test_getting_amount_of_currently_buffered_data(self):
+    @parameterized.expand(
+        [
+            ("0", ""),
+            ("1", "a"),
+            ("2", "abc"),
+            ("3", "123123qweqewasdasdzccz"),
+        ]
+    )
+    def test_getting_amount_of_currently_buffered_data(self, _, test_data):
         buffer = DataBuffer()
-        buffer += "abcdef"
+        buffer += test_data
 
-        self.assertEqual(buffer.length, 6)
+        # Check if the amount of added data is correct
+        self.assertEqual(buffer.length, len(test_data))
 
     def test_data_notification_event_new_value(self):
         test_data_a = "test string"
@@ -88,14 +110,17 @@ class DataBufferTests(unittest.TestCase):
         buffer_watcher = DataBufferWatcher()
         buffer.attach(buffer_watcher)
 
+        # Add first value and check if it's been correctly notified about
         buffer.add_value(test_data_a)
         self.assertListEqual(buffer_watcher.data_from_last_notification, [test_data_a])
         self.assertEqual(buffer_watcher.amount_of_values_last_notified, 1)
 
+        # Add second value and check if it's been correctly notified about
         buffer.add_value(test_data_b)
         self.assertListEqual(buffer_watcher.data_from_last_notification, [test_data_b])
         self.assertEqual(buffer_watcher.amount_of_values_last_notified, 1)
 
+        # Verify data integrity
         self.assertListEqual(buffer.data, buffer_watcher.data)
         self.assertListEqual(buffer_watcher.data, test_data)
 
@@ -108,14 +133,21 @@ class DataBufferTests(unittest.TestCase):
         buffer_watcher = DataBufferWatcher()
         buffer.attach(buffer_watcher)
 
+        # Add first collection of values and check if it's been correctly notified about
         buffer.add_values(test_data_a)
         self.assertListEqual(buffer_watcher.data_from_last_notification, test_data_a)
-        self.assertEqual(buffer_watcher.amount_of_values_last_notified, len(test_data_a))
+        self.assertEqual(
+            buffer_watcher.amount_of_values_last_notified, len(test_data_a)
+        )
 
+        # Add second collection of values and check if it's been correctly notified about
         buffer.add_values(test_data_b)
         self.assertListEqual(buffer_watcher.data_from_last_notification, test_data_b)
-        self.assertEqual(buffer_watcher.amount_of_values_last_notified, len(test_data_b))
+        self.assertEqual(
+            buffer_watcher.amount_of_values_last_notified, len(test_data_b)
+        )
 
+        # Verify data integrity
         self.assertListEqual(buffer.data, buffer_watcher.data)
         self.assertListEqual(buffer_watcher.data, test_data)
 
@@ -127,20 +159,87 @@ class DataBufferTests(unittest.TestCase):
         buffer.attach(buffer_watcher)
 
         buffer.add_values(test_data)
-
-        self.assertListEqual(buffer.data, buffer_watcher.data)
-        self.assertListEqual(buffer_watcher.data, test_data)
-
         buffer.clear()
 
+        # Check if the watching buffer has been notified to clear the data
         self.assertEqual(buffer.length, 0)
         self.assertEqual(len(buffer_watcher.data), 0)
 
-    def test_data_notification_event_timeout(self):
-        self.fail("Not implemented yet!")
+    def test_data_notification_disabling(self):
+        test_data = [1, 2, 3, 4, 5]
 
-    def test_data_notification_event_character_detected(self):
-        self.fail("Not implemented yet!")
+        buffer = DataBuffer()
+        buffer.set_data_notification_threshold(None)
+        buffer_watcher = DataBufferWatcher()
+        buffer.attach(buffer_watcher)
 
-    def test_data_notification_event_character_sequence_detected(self):
-        self.fail("Not implemented yet!")
+        buffer.add_values(test_data)
+
+        # Verify that no notification has been sent to watching buffer, hence it should be empty
+        self.assertIsNone(buffer_watcher.amount_of_values_last_notified)
+        self.assertListEqual(buffer_watcher.data_from_last_notification, [])
+        self.assertListEqual(buffer_watcher.data, [])
+
+    def test_data_notification_reenabling_without_notification_reset(self):
+        test_data_a = [1, 2, 3]
+        test_data_b = [4, 5]
+        test_data = test_data_a + test_data_b
+
+        buffer = DataBuffer()
+        buffer.set_data_notification_threshold(None)
+        buffer_watcher = DataBufferWatcher()
+        buffer.attach(buffer_watcher)
+
+        buffer.add_values(test_data_a)
+
+        # Data added, but notifications were disabled so the watching buffer should be empty
+        self.assertIsNone(buffer_watcher.amount_of_values_last_notified)
+        self.assertListEqual(buffer_watcher.data_from_last_notification, [])
+        self.assertListEqual(buffer_watcher.data, [])
+
+        buffer.set_data_notification_threshold(1)
+        buffer.add_values(test_data_b)
+
+        # Data added after notifications had been enabled, verify if the notification was correct
+        # Since notifications weren't reset, received notification should inform about all the data that's been 
+        # added since the notifications had been disabled
+        self.assertEqual(buffer_watcher.amount_of_values_last_notified, len(test_data))
+        self.assertListEqual(buffer_watcher.data_from_last_notification, test_data)
+        self.assertListEqual(buffer_watcher.data, test_data)
+
+    def test_data_notification_reenabling_with_notification_reset(self):
+        test_data_a = [1, 2, 3]
+        test_data_b = [4, 5]
+
+        buffer = DataBuffer()
+        buffer.set_data_notification_threshold(None)
+        buffer_watcher = DataBufferWatcher()
+        buffer.attach(buffer_watcher)
+
+        buffer.add_values(test_data_a)
+
+        # Data added, but notifications were disabled so the watching buffer should be empty
+        self.assertIsNone(buffer_watcher.amount_of_values_last_notified)
+        self.assertListEqual(buffer_watcher.data_from_last_notification, [])
+        self.assertListEqual(buffer_watcher.data, [])
+
+        buffer.set_data_notification_threshold(1, reset_notifications=True)
+        buffer.add_values(test_data_b)
+
+        # Data added after notifications ha been enabled, verify if the notification was correct
+        # Since notifications were reset, received notification should inform only about the data
+        # added the second time, after they were re-enabled.
+        self.assertEqual(
+            buffer_watcher.amount_of_values_last_notified, len(test_data_b)
+        )
+        self.assertListEqual(buffer_watcher.data_from_last_notification, test_data_b)
+        self.assertListEqual(buffer_watcher.data, test_data_b)
+
+    # def test_data_notification_event_timeout(self):
+    #     self.fail("Not implemented yet!")
+
+    # def test_data_notification_event_character_detected(self):
+    #     self.fail("Not implemented yet!")
+
+    # def test_data_notification_event_character_sequence_detected(self):
+    #     self.fail("Not implemented yet!")
