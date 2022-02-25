@@ -36,7 +36,7 @@ class DataBuffer(Subject):
 
     @notifications_enabled.setter
     def notifications_enabled(self, enabled: bool) -> None:
-        self._notifications_enabled = enabled
+        self._notifications_enabled = bool(enabled)
 
     def clear(self) -> None:
         """Clear the content of the buffer"""

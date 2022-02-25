@@ -10,7 +10,7 @@ class DataBufferWatcher(Observer):
         super().__init__()
         self.data: list = []
         self.data_from_last_notification: list = []
-        self.amount_of_values_last_notified: int = None
+        self.amount_of_values_last_notified: int | None = None
 
     def update(self, subject, event_data: dict) -> None:
         if event_data["event_name"] == "newdata":
