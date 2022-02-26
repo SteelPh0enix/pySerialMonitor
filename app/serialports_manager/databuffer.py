@@ -58,7 +58,7 @@ class DataBuffer(Subject):
         self.add_values(new_data)
         return self
 
-    def __getitem__(self, key: int):
+    def __getitem__(self, key: int | slice):
         return self.data[key]
 
     def __len__(self) -> int:
