@@ -58,6 +58,12 @@ class DataBuffer(Subject):
         self.add_values(new_data)
         return self
 
+    def __getitem__(self, key: int):
+        return self.data[key]
+
+    def __len__(self) -> int:
+        return self.length
+
     def _notify_clear(self) -> None:
         if self._notifications_enabled:
             self.notify({"event_name": "clear"})

@@ -220,3 +220,12 @@ class DataBufferTests(unittest.TestCase):
         self.assertListEqual(buffer_watcher.data_from_last_notification, test_data_b)
         self.assertListEqual(buffer_watcher.data, test_data_b)
 
+    def test_container_like_access(self):
+        test_data = [1, 2, 3, 4, 5, 6]
+        
+        buffer = DataBuffer()
+        buffer += test_data
+        
+        self.assertEqual(len(buffer), len(test_data))
+        for i in range(0, len(test_data)):
+            self.assertEqual(buffer[i], test_data[i])
