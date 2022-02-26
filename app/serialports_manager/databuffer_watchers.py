@@ -2,7 +2,7 @@ from app.serialports_manager.databuffer import DataBuffer
 from app.utils.observer import Observer, Subject
 
 
-class GenericDataBufferWatcher(Subject, Observer):
+class GenericDataBufferWatcher(Observer, Subject):
     """This is base class for all the DataBuffer watchers.
 
     Use `attach` method to add new Observer and receive notifications.
@@ -13,7 +13,8 @@ class GenericDataBufferWatcher(Subject, Observer):
     You can also enable or disable notifications by setting `notifications_enabled` property value to `True` and `False` accordingly"""
 
     def __init__(self) -> None:
-        super().__init__()
+        super(Subject, self).__init__()
+        super(Observer, self).__init__()
         self._last_notified_value: int = 0
         self._buffer_length: int = 0
         self._notifications_enabled: bool = True

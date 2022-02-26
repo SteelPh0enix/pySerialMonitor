@@ -4,6 +4,10 @@ from typing import Protocol
 
 
 class Observer(Protocol):
+    def __init__(self, **kwargs) -> None:
+        super().__init__(**kwargs)
+        pass
+
     def update(self, subject, event_data: dict) -> None:
         """This method is called when Observer receives notification from Subject.
         
@@ -13,7 +17,8 @@ class Observer(Protocol):
 
 
 class Subject:
-    def __init__(self) -> None:
+    def __init__(self, **kwargs) -> None:
+        super().__init__(**kwargs)
         self._observers: list[Observer] = []
 
     def attach(self, observer: Observer) -> None:
