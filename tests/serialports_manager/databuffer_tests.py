@@ -1,7 +1,7 @@
 import unittest
 
-from app.serialports_manager.databuffer import DataBuffer
-from app.utils.observer import Observer
+from app.serialports_manager import DataBuffer
+from app.utils import Observer
 from parameterized import parameterized
 
 
@@ -222,10 +222,10 @@ class DataBufferTests(unittest.TestCase):
 
     def test_container_like_access(self):
         test_data = [1, 2, 3, 4, 5, 6]
-        
+
         buffer = DataBuffer()
         buffer += test_data
-        
+
         self.assertEqual(len(buffer), len(test_data))
         for i in range(0, len(test_data)):
             self.assertEqual(buffer[i], test_data[i])

@@ -1,8 +1,8 @@
 import unittest
 
-from app.serialports_manager.databuffer import DataBuffer
-from app.serialports_manager.databuffer_watchers import ValuesAmountDataBufferWatcher
-from app.utils.observer import Observer
+from app.serialports_manager import DataBuffer
+from app.serialports_manager.databuffer_watchers import ValuesAmountDataBufferWatcher 
+from app.utils import Observer
 
 
 class TestObserver(Observer):

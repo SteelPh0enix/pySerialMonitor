@@ -1,5 +1,5 @@
 from typing import Collection
-from app.utils.observer import Subject
+from app.utils import Subject
 
 
 class DataBuffer(Subject):

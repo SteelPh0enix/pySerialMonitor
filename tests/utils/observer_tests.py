@@ -1,6 +1,6 @@
 import unittest
 
-from app.utils.observer import Observer, Subject
+from app.utils import Observer, Subject
 
 
 class TestSubject(Subject):
