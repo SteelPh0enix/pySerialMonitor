@@ -10,7 +10,7 @@ class Observer(Protocol):
 
     def update(self, subject, event_data: dict) -> None:
         """This method is called when Observer receives notification from Subject.
-        
+
         `event_data` is a dict of values passed from the subject.
         Read the subject's documentation to see what's inside."""
         raise NotImplementedError
@@ -33,7 +33,7 @@ class Subject:
 
     def notify(self, event_data: dict = {}, modifier: Observer | None = None) -> None:
         """Notify the observers on the list.
-        
+
         event_data is a dict that will be passed to every observer."""
         for observer in self._observers:
             if modifier != observer:

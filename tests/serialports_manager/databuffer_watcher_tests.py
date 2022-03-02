@@ -1,7 +1,7 @@
 import unittest
 
 from app.serialports_manager import DataBuffer
-from app.serialports_manager.databuffer_watchers import ValuesAmountDataBufferWatcher 
+from app.serialports_manager.databuffer_watchers import ValuesAmountDataBufferWatcher
 from app.utils import Observer
 
 
@@ -45,9 +45,13 @@ class ValuesAmountDataBufferWatcherTests(unittest.TestCase):
         buffer.add_value(3)
         # Now notification should be triggered
         self.assertIsNotNone(observer.last_updated_data)
-        self.assertDictContainsSubset({"databuffer": buffer, "new_data": [1, 2, 3]}, observer.last_updated_data)
+        self.assertDictContainsSubset(
+            {"databuffer": buffer, "new_data": [1, 2, 3]}, observer.last_updated_data
+        )
 
         buffer.add_value(4)
         # No new notification should be fired, so the previous asserts should still be true
         self.assertIsNotNone(observer.last_updated_data)
-        self.assertDictContainsSubset({"databuffer": buffer, "new_data": [1, 2, 3]}, observer.last_updated_data)
+        self.assertDictContainsSubset(
+            {"databuffer": buffer, "new_data": [1, 2, 3]}, observer.last_updated_data
+        )
