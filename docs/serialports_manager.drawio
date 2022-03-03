@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="qUkAPRQlvikeLnpUgmCC" name="Functionalities">
-        <mxGraphModel dx="1141" dy="788" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+        <mxGraphModel dx="1655" dy="849" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -115,41 +115,47 @@
                 <mxCell id="227" value="Notify about new data" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fillColor=#6a00ff;fontColor=#ffffff;strokeColor=#3700CC;fontStyle=1" parent="221" vertex="1">
                     <mxGeometry x="190" y="110" width="140" height="50" as="geometry"/>
                 </mxCell>
-                <mxCell id="261" value="DataBufferWatcher (abstract)" style="swimlane;fillColor=#3B3B3B;strokeColor=#7D7D7D;fontColor=#DEDEDE;labelBackgroundColor=none;fontStyle=2" vertex="1" parent="37">
+                <mxCell id="261" value="DataBufferWatcher (abstract)" style="swimlane;fillColor=#3B3B3B;strokeColor=#7D7D7D;fontColor=#DEDEDE;labelBackgroundColor=none;fontStyle=2" parent="37" vertex="1">
                     <mxGeometry x="390" y="55" width="360" height="225" as="geometry"/>
                 </mxCell>
-                <mxCell id="262" value="Set watcher configuration" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fillColor=#f0a30a;fontColor=#000000;strokeColor=#BD7000;fontStyle=3" vertex="1" parent="261">
+                <mxCell id="262" value="Set watcher configuration" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fillColor=#f0a30a;fontColor=#000000;strokeColor=#BD7000;fontStyle=3" parent="261" vertex="1">
                     <mxGeometry x="20" y="40" width="140" height="50" as="geometry"/>
                 </mxCell>
-                <mxCell id="263" value="Connect the watcher to DataBuffer" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fillColor=#f0a30a;fontColor=#000000;strokeColor=#BD7000;fontStyle=1" vertex="1" parent="261">
+                <mxCell id="263" value="Connect the watcher to DataBuffer" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fillColor=#f0a30a;fontColor=#000000;strokeColor=#BD7000;fontStyle=1" parent="261" vertex="1">
                     <mxGeometry x="20" y="165" width="140" height="50" as="geometry"/>
                 </mxCell>
-                <mxCell id="264" value="Watch the DataBuffer&amp;nbsp;" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fillColor=#008a00;fontColor=#ffffff;strokeColor=#005700;" vertex="1" parent="261">
+                <mxCell id="264" value="Watch the DataBuffer&amp;nbsp;" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fillColor=#008a00;fontColor=#ffffff;strokeColor=#005700;" parent="261" vertex="1">
                     <mxGeometry x="190" y="40" width="150" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="267" value="When the conditions are fulfilled, notify about new data" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fillColor=#6a00ff;fontColor=#ffffff;strokeColor=#3700CC;fontStyle=2" vertex="1" parent="261">
+                <mxCell id="267" value="When the conditions are fulfilled, notify about new data" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fillColor=#6a00ff;fontColor=#ffffff;strokeColor=#3700CC;fontStyle=2" parent="261" vertex="1">
                     <mxGeometry x="190" y="120" width="140" height="50" as="geometry"/>
                 </mxCell>
-                <mxCell id="279" value="Get information about data watcher" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fillColor=#f0a30a;fontColor=#000000;strokeColor=#BD7000;fontStyle=3" vertex="1" parent="261">
+                <mxCell id="279" value="Get information about data watcher" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fillColor=#f0a30a;fontColor=#000000;strokeColor=#BD7000;fontStyle=3" parent="261" vertex="1">
                     <mxGeometry x="20" y="103" width="140" height="50" as="geometry"/>
                 </mxCell>
-                <mxCell id="277" value="Get/Set data watcher" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fillColor=#f0a30a;fontColor=#000000;strokeColor=#BD7000;fontStyle=1" vertex="1" parent="37">
+                <mxCell id="277" value="Get/Set data watcher" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fillColor=#f0a30a;fontColor=#000000;strokeColor=#BD7000;fontStyle=1" parent="37" vertex="1">
                     <mxGeometry x="20" y="163" width="140" height="50" as="geometry"/>
                 </mxCell>
-                <mxCell id="284" value="If there's no DataBufferWatcher, connect internal NewData notification directly to data source" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fillColor=#647687;fontColor=#ffffff;strokeColor=#314354;" vertex="1" parent="37">
+                <mxCell id="284" value="If there's no DataBufferWatcher, connect internal NewData notification directly to data source" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fillColor=#647687;fontColor=#ffffff;strokeColor=#314354;" parent="37" vertex="1">
                     <mxGeometry x="190" y="287" width="160" height="70" as="geometry"/>
                 </mxCell>
-                <mxCell id="285" value="When DataBufferWatcher notifies about new value, convert it and add it to ValueBuffer" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fillColor=#647687;fontColor=#ffffff;strokeColor=#314354;" vertex="1" parent="37">
+                <mxCell id="285" value="When DataBufferWatcher notifies about new value, convert it and add it to ValueBuffer" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fillColor=#647687;fontColor=#ffffff;strokeColor=#314354;" parent="37" vertex="1">
                     <mxGeometry x="190" y="370" width="160" height="60" as="geometry"/>
                 </mxCell>
-                <mxCell id="286" value="If there's a DataBufferWatcher, connect it to internal NewData notification" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fillColor=#647687;fontColor=#ffffff;strokeColor=#314354;" vertex="1" parent="37">
+                <mxCell id="286" value="If there's a DataBufferWatcher, connect it to internal NewData notification" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fillColor=#647687;fontColor=#ffffff;strokeColor=#314354;" parent="37" vertex="1">
                     <mxGeometry x="190" y="213" width="160" height="67" as="geometry"/>
                 </mxCell>
-                <mxCell id="287" value="Manage the buffering and conversion of values from SerialPort" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fillColor=#008a00;fontColor=#ffffff;strokeColor=#005700;" vertex="1" parent="37">
+                <mxCell id="287" value="Manage the buffering and conversion of values from SerialPort" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fillColor=#008a00;fontColor=#ffffff;strokeColor=#005700;" parent="37" vertex="1">
                     <mxGeometry x="190" y="108" width="150" height="62" as="geometry"/>
                 </mxCell>
-                <mxCell id="293" value="Future idea: chaining DataConverters?" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fillColor=#a20025;strokeColor=#6F0000;fontColor=#ffffff;" vertex="1" parent="37">
+                <mxCell id="293" value="Future idea: chaining DataConverters?" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fillColor=#a20025;strokeColor=#6F0000;fontColor=#ffffff;" parent="37" vertex="1">
                     <mxGeometry x="195" y="450" width="140" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="294" value="Data converters:&lt;br&gt;* Bytes to base2, base10, base16 ints&lt;br&gt;* Bytes to double/float" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fillColor=#a20025;strokeColor=#6F0000;fontColor=#ffffff;" vertex="1" parent="37">
+                    <mxGeometry x="910" y="260" width="230" height="80" as="geometry"/>
+                </mxCell>
+                <mxCell id="295" value="DataBufferWatchers:&lt;br&gt;* Byte amount watcher (notifies after n bytes are received)&lt;br&gt;* Byte pattern watcher&lt;br&gt;* Timeout watcher (notifies every n milliseconds if new values are available" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fillColor=#a20025;strokeColor=#6F0000;fontColor=#ffffff;" vertex="1" parent="37">
+                    <mxGeometry x="910" y="360" width="230" height="110" as="geometry"/>
                 </mxCell>
                 <mxCell id="133" value="Notify about new value from serial port" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fillColor=#6a00ff;fontColor=#ffffff;strokeColor=#3700CC;" parent="56" vertex="1">
                     <mxGeometry x="200" y="50" width="140" height="50" as="geometry"/>
@@ -199,11 +205,14 @@
                 <mxCell id="51" value="Notify about new data" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fillColor=#6a00ff;fontColor=#ffffff;strokeColor=#3700CC;fontStyle=1" parent="31" vertex="1">
                     <mxGeometry x="190" y="110" width="140" height="50" as="geometry"/>
                 </mxCell>
-                <mxCell id="265" value="Clear buffered data" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fillColor=#f0a30a;fontColor=#000000;strokeColor=#BD7000;fontStyle=0" vertex="1" parent="17">
+                <mxCell id="265" value="Clear buffered data" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fillColor=#f0a30a;fontColor=#000000;strokeColor=#BD7000;fontStyle=0" parent="17" vertex="1">
                     <mxGeometry x="20" y="220" width="140" height="50" as="geometry"/>
                 </mxCell>
-                <mxCell id="266" value="Get the amount of currently buffered data" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fillColor=#f0a30a;fontColor=#000000;strokeColor=#BD7000;fontStyle=0" vertex="1" parent="17">
+                <mxCell id="266" value="Get the amount of currently buffered data" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fillColor=#f0a30a;fontColor=#000000;strokeColor=#BD7000;fontStyle=0" parent="17" vertex="1">
                     <mxGeometry x="20" y="280" width="140" height="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="296" value="If multiple bytes have been received, add them in single batch" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fillColor=#a20025;strokeColor=#6F0000;fontColor=#ffffff;" vertex="1" parent="17">
+                    <mxGeometry x="190" y="260" width="160" height="60" as="geometry"/>
                 </mxCell>
                 <mxCell id="140" value="Notify about closing or opening the port" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fillColor=#6a00ff;fontColor=#ffffff;strokeColor=#3700CC;fontStyle=1" parent="56" vertex="1">
                     <mxGeometry x="200" y="170" width="140" height="50" as="geometry"/>
@@ -229,19 +238,19 @@
                 <mxCell id="240" value="Open/close serial port with specific configuration" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fillColor=#f0a30a;fontColor=#000000;strokeColor=#BD7000;fontStyle=0" parent="56" vertex="1">
                     <mxGeometry x="29" y="50" width="140" height="50" as="geometry"/>
                 </mxCell>
-                <mxCell id="268" value="" style="endArrow=classic;html=1;strokeColor=#858585;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.314;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="56" source="17" target="37">
+                <mxCell id="268" value="" style="endArrow=classic;html=1;strokeColor=#858585;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.314;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" parent="56" source="17" target="37" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <mxPoint x="600" y="470" as="sourcePoint"/>
                         <mxPoint x="720" y="470" as="targetPoint"/>
                     </mxGeometry>
                 </mxCell>
-                <mxCell id="269" value="Notifies" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;labelBackgroundColor=#3B3B3B;fontColor=#DEDEDE;" connectable="0" vertex="1" parent="268">
+                <mxCell id="269" value="Notifies" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;labelBackgroundColor=#3B3B3B;fontColor=#DEDEDE;" parent="268" connectable="0" vertex="1">
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
-                <mxCell id="290" value="Get/Set data converter" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fillColor=#f0a30a;fontColor=#000000;strokeColor=#BD7000;shadow=0;glass=0;sketch=0;fontStyle=0" vertex="1" parent="56">
+                <mxCell id="290" value="Get/Set data converter" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fillColor=#f0a30a;fontColor=#000000;strokeColor=#BD7000;shadow=0;glass=0;sketch=0;fontStyle=0" parent="56" vertex="1">
                     <mxGeometry x="30" y="351" width="140" height="50" as="geometry"/>
                 </mxCell>
-                <mxCell id="291" value="Get/Set data watcher" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fillColor=#f0a30a;fontColor=#000000;strokeColor=#BD7000;fontStyle=0" vertex="1" parent="56">
+                <mxCell id="291" value="Get/Set data watcher" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fillColor=#f0a30a;fontColor=#000000;strokeColor=#BD7000;fontStyle=0" parent="56" vertex="1">
                     <mxGeometry x="31" y="411" width="140" height="50" as="geometry"/>
                 </mxCell>
                 <mxCell id="79" value="Containers marked with the same, non-default, colour are instances of the same class.&lt;br&gt;&lt;b&gt;Bold&lt;/b&gt; functions and notifications are the original ones in hierarchy. Non-bold functions and notifications indicate that specific function or notification is accessible from an object's scope, but they call, or are caused by,&amp;nbsp;&lt;b&gt;bold&lt;/b&gt; ones.&lt;br&gt;Normal, non-bold names of classes/modules indicate that they are external dependencies. &lt;i&gt;Italic&lt;/i&gt;&amp;nbsp;names of classes mean that they have abstract implementation (to-be-done outside of the module)" style="text;html=1;strokeColor=none;fillColor=#3D3D3D;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontColor=#DEDEDE;" parent="1" vertex="1">
