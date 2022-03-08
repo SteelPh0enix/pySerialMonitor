@@ -1,8 +1,8 @@
-from . import GenericDataBufferWatcher
 from .. import DataBuffer
+from . import GenericWatcher
 
 
-class ValuesAmountDataBufferWatcher(GenericDataBufferWatcher):
+class ValuesAmountWatcher(GenericWatcher):
     """This watcher looks for specified amount of values added to the buffer.
 
     Notifies with `{"event_name": "newdata", "new_values": [list of new values]}`"""

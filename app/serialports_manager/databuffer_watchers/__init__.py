@@ -1,2 +1,2 @@
-from .generic_watcher import GenericDataBufferWatcher
-from .values_amount_watcher import ValuesAmountDataBufferWatcher
+from .generic_watcher import GenericWatcher
+from .values_amount_watcher import ValuesAmountWatcher

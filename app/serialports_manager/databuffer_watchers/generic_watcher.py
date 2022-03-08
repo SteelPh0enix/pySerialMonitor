@@ -2,7 +2,7 @@ from .. import DataBuffer
 from app.utils import Observer, Subject
 
 
-class GenericDataBufferWatcher(Observer, Subject):
+class GenericWatcher(Observer, Subject):
     """This is base class for all the DataBuffer watchers.
 
     Use `attach` method to add new Observer and receive notifications.

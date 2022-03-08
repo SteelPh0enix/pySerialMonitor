@@ -1,14 +1,14 @@
 import unittest
 
 from app.serialports_manager import DataBuffer
-from app.serialports_manager.databuffer_watchers import ValuesAmountDataBufferWatcher
+from app.serialports_manager.databuffer_watchers import ValuesAmountWatcher
 from .test_observer import TestObserver
 
 
 class ValuesAmountDataBufferWatcherTests(unittest.TestCase):
     def test_basic_notifications_single_values(self):
         buffer = DataBuffer()
-        watcher = ValuesAmountDataBufferWatcher()
+        watcher = ValuesAmountWatcher()
         observer = TestObserver()
 
         # Attach the watcher to the buffer
