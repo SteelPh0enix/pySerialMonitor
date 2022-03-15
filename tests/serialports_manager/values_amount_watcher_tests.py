@@ -5,7 +5,7 @@ from app.serialports_manager.databuffer_watchers import ValuesAmountWatcher
 from .test_observer import TestObserver
 
 
-class ValuesAmountDataBufferWatcherTests(unittest.TestCase):
+class ValuesAmountWatcherTests(unittest.TestCase):
     def test_basic_notifications_single_values(self):
         buffer = DataBuffer()
         watcher = ValuesAmountWatcher()

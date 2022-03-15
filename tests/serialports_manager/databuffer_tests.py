@@ -229,3 +229,4 @@ class DataBufferTests(unittest.TestCase):
         self.assertEqual(len(buffer), len(test_data))
         for i in range(0, len(test_data)):
             self.assertEqual(buffer[i], test_data[i])
+

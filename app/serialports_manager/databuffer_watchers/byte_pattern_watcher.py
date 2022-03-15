@@ -54,6 +54,12 @@ class BytePatternWatcher(GenericWatcher):
         Returns a list with found pattern indexes, or None if no pattern has been found"""
         if len(data_array) < len(self.pattern):
             return None
+        if len(self.pattern) == 1:
+            try:
+                found_index = data_array.index(self.pattern)
+                return [found_index]
+            except ValueError:
+                return None
 
         found_indexes = self._kmp.search(data_array, self.pattern)
         if len(found_indexes) == 0:
@@ -68,4 +74,4 @@ class BytePatternWatcher(GenericWatcher):
             len(self.pattern) if self.return_data_with_pattern else 0
         )
         data = self._new_data_buffer.data[start_index:real_end_index].copy()
-        return bytearray(data)
+        return data

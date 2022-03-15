@@ -50,7 +50,7 @@ class DataBuffer(Subject):
 
     def add_values(self, values: Collection) -> None:
         """Add multiple values (collection) to the buffer"""
-        self._buffer += values
+        self._buffer.extend(values)
         self._notify_newdata(values)
 
     def __iadd__(self, new_data: Collection):

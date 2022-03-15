@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="qUkAPRQlvikeLnpUgmCC" name="Functionalities">
-        <mxGraphModel dx="1655" dy="849" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+        <mxGraphModel dx="1046" dy="604" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -53,7 +53,7 @@
                     <mxGeometry relative="1" as="geometry"/>
                 </mxCell>
                 <mxCell id="56" value="SerialPort" style="swimlane;glass=0;fillColor=#3B3B3B;strokeColor=#7D7D7D;fontColor=#DEDEDE;labelBackgroundColor=none;" parent="1" vertex="1">
-                    <mxGeometry x="490" y="130" width="1580" height="1130" as="geometry"/>
+                    <mxGeometry x="490" y="130" width="1580" height="1260" as="geometry"/>
                 </mxCell>
                 <mxCell id="57" value="Transmit the data over serial port" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fillColor=#f0a30a;fontColor=#000000;strokeColor=#BD7000;" parent="56" vertex="1">
                     <mxGeometry x="30" y="110" width="140" height="50" as="geometry"/>
@@ -62,7 +62,7 @@
                     <mxGeometry x="30" y="170" width="140" height="50" as="geometry"/>
                 </mxCell>
                 <mxCell id="37" value="ValueBuffer" style="swimlane;fontStyle=1;fillColor=#3B3B3B;strokeColor=#7D7D7D;fontColor=#DEDEDE;labelBackgroundColor=none;" parent="56" vertex="1">
-                    <mxGeometry x="400" y="500" width="1160" height="610" as="geometry"/>
+                    <mxGeometry x="400" y="630" width="1160" height="610" as="geometry"/>
                 </mxCell>
                 <mxCell id="38" value="Attach to data source" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fillColor=#f0a30a;fontColor=#000000;strokeColor=#BD7000;fontStyle=1" parent="37" vertex="1">
                     <mxGeometry x="20" y="40" width="140" height="50" as="geometry"/>
@@ -151,17 +151,17 @@
                 <mxCell id="293" value="Future idea: chaining DataConverters?" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fillColor=#a20025;strokeColor=#6F0000;fontColor=#ffffff;" parent="37" vertex="1">
                     <mxGeometry x="195" y="450" width="140" height="50" as="geometry"/>
                 </mxCell>
-                <mxCell id="294" value="Data converters:&lt;br&gt;* Bytes to base2, base10, base16 ints&lt;br&gt;* Bytes to double/float" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fillColor=#a20025;strokeColor=#6F0000;fontColor=#ffffff;" vertex="1" parent="37">
+                <mxCell id="294" value="Data converters:&lt;br&gt;* Bytes to base2, base10, base16 ints&lt;br&gt;* Bytes to double/float" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fillColor=#a20025;strokeColor=#6F0000;fontColor=#ffffff;" parent="37" vertex="1">
                     <mxGeometry x="910" y="260" width="230" height="80" as="geometry"/>
                 </mxCell>
-                <mxCell id="295" value="DataBufferWatchers:&lt;br&gt;* Byte amount watcher (notifies after n bytes are received)&lt;br&gt;* Byte pattern watcher&lt;br&gt;* Timeout watcher (notifies every n milliseconds if new values are available" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fillColor=#a20025;strokeColor=#6F0000;fontColor=#ffffff;" vertex="1" parent="37">
+                <mxCell id="295" value="DataBufferWatchers:&lt;br&gt;* Byte amount watcher (notifies after n bytes are received)&lt;br&gt;* Byte pattern watcher&lt;br&gt;* Timeout watcher (notifies every n milliseconds if new values are available" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fillColor=#a20025;strokeColor=#6F0000;fontColor=#ffffff;" parent="37" vertex="1">
                     <mxGeometry x="910" y="360" width="230" height="110" as="geometry"/>
                 </mxCell>
                 <mxCell id="133" value="Notify about new value from serial port" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fillColor=#6a00ff;fontColor=#ffffff;strokeColor=#3700CC;" parent="56" vertex="1">
                     <mxGeometry x="200" y="50" width="140" height="50" as="geometry"/>
                 </mxCell>
                 <mxCell id="17" value="SerialPortIO" style="swimlane;fillColor=#3B3B3B;strokeColor=#7D7D7D;fontColor=#DEDEDE;labelBackgroundColor=none;" parent="56" vertex="1">
-                    <mxGeometry x="400" y="40" width="730" height="390" as="geometry"/>
+                    <mxGeometry x="400" y="40" width="730" height="530" as="geometry"/>
                 </mxCell>
                 <mxCell id="20" value="Transmit the data over serial port" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fillColor=#f0a30a;fontColor=#000000;strokeColor=#BD7000;fontStyle=1" parent="17" vertex="1">
                     <mxGeometry x="20" y="40" width="140" height="50" as="geometry"/>
@@ -185,7 +185,7 @@
                     <mxGeometry x="20" y="100" width="140" height="50" as="geometry"/>
                 </mxCell>
                 <mxCell id="31" value="ByteBuffer (DataBuffer)" style="swimlane;startSize=23;fillColor=#6d8764;fontColor=#ffffff;strokeColor=#3A5431;labelBackgroundColor=none;" parent="17" vertex="1">
-                    <mxGeometry x="370" y="40" width="345" height="280" as="geometry"/>
+                    <mxGeometry x="370" y="40" width="345" height="340" as="geometry"/>
                 </mxCell>
                 <mxCell id="33" value="Get a copy of buffered data" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fillColor=#f0a30a;fontColor=#000000;strokeColor=#BD7000;fontStyle=1" parent="31" vertex="1">
                     <mxGeometry x="20" y="40" width="140" height="50" as="geometry"/>
@@ -211,8 +211,14 @@
                 <mxCell id="266" value="Get the amount of currently buffered data" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fillColor=#f0a30a;fontColor=#000000;strokeColor=#BD7000;fontStyle=0" parent="17" vertex="1">
                     <mxGeometry x="20" y="280" width="140" height="50" as="geometry"/>
                 </mxCell>
-                <mxCell id="296" value="If multiple bytes have been received, add them in single batch" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fillColor=#a20025;strokeColor=#6F0000;fontColor=#ffffff;" vertex="1" parent="17">
+                <mxCell id="296" value="If multiple bytes have been received, add them in single batch" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fillColor=#a20025;strokeColor=#6F0000;fontColor=#ffffff;" parent="17" vertex="1">
                     <mxGeometry x="190" y="260" width="160" height="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="365" value="SerialDataSanitizer" style="swimlane;fillColor=#3B3B3B;strokeColor=#7D7D7D;fontColor=#DEDEDE;labelBackgroundColor=none;" vertex="1" parent="17">
+                    <mxGeometry x="20" y="390" width="240" height="120" as="geometry"/>
+                </mxCell>
+                <mxCell id="366" value="Convert the data coming from serial to bytearrays" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fillColor=#008a00;fontColor=#ffffff;strokeColor=#005700;" vertex="1" parent="365">
+                    <mxGeometry x="20" y="50" width="140" height="50" as="geometry"/>
                 </mxCell>
                 <mxCell id="140" value="Notify about closing or opening the port" style="rounded=1;whiteSpace=wrap;html=1;absoluteArcSize=1;arcSize=14;strokeWidth=2;fillColor=#6a00ff;fontColor=#ffffff;strokeColor=#3700CC;fontStyle=1" parent="56" vertex="1">
                     <mxGeometry x="200" y="170" width="140" height="50" as="geometry"/>

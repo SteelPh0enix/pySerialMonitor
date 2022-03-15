@@ -1,2 +1,3 @@
 from .generic_watcher import GenericWatcher
 from .values_amount_watcher import ValuesAmountWatcher
+from .byte_pattern_watcher import BytePatternWatcher
