@@ -1,6 +1,9 @@
 """Courtesy of https://gist.github.com/m00nlight/daa6786cc503fde12a77"""
 
 
+from typing import Iterator
+
+
 class KMP:
     def partial(self, pattern):
         """Calculate partial match table: String -> [Int]"""

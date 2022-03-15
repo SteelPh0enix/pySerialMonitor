@@ -1,26 +1,15 @@
 from . import GenericWatcher
 from .. import DataBuffer
 from ...utils import KMP
-from enum import Enum
 
 
 class BytePatternWatcher(GenericWatcher):
-    class SearchIn(Enum):
-        # Will search only in added values, and ignore what's in the buffer
-        NEW_VALUES = 1
-        # Will search in whole buffer, after new values has been added
-        WHOLE_BUFFER = 2
-        # Will search in new values, and if not found it'll look in the buffer
-        # This is default.
-        NEW_VALUES_AND_BUFFER = 3
-
     def __init__(self) -> None:
         super().__init__()
         self._pattern: bytearray = bytearray()
-        self._behaviour: BytePatternWatcher.SearchIn = (
-            BytePatternWatcher.SearchIn.NEW_VALUES_AND_BUFFER
-        )
         self._kmp = KMP()
+        self._new_data_buffer = DataBuffer()
+        self._return_with_pattern: bool = True
 
     @property
     def pattern(self) -> bytearray:
@@ -32,25 +21,51 @@ class BytePatternWatcher(GenericWatcher):
             self._pattern = new_pattern
 
     @property
-    def behaviour(self) -> SearchIn:
-        return self._behaviour
+    def return_data_with_pattern(self) -> bool:
+        return self._return_with_pattern
 
-    @behaviour.setter
-    def behaviour(self, new_behaviour: SearchIn) -> None:
-        self._behaviour = new_behaviour
+    @return_data_with_pattern.setter
+    def return_data_with_pattern(self, return_with_pattern: bool) -> None:
+        self._return_with_pattern = bool(return_with_pattern)
 
     def _check_new_data(self, buffer: DataBuffer, new_values: list) -> dict | None:
-        pass
+        self._new_data_buffer += new_values
+        found_indexes = self._check_if_pattern_exists(self._new_data_buffer.data)
+
+        if found_indexes is None:
+            return None
+
+        # _check_if_pattern_exists returns a list of indexes where the pattern has been found
+        # therefore, "new_values" will also be a list, in case more than one pattern has been found
+        new_data_list: list[bytearray] = []
+        last_index: int = 0
+        for index in found_indexes:
+            new_data_list.append(self._get_data_from_internal_buffer(last_index, index))
+            last_index = index + len(self.pattern)
+
+        # remove the fetched values from internal buffer (we got copies via _get_data_from_internal_buffer)
+        del self._new_data_buffer.data[0:last_index]
+
+        # return the dictionary with results
+        return dict({"new_values": new_data_list})
 
     def _check_if_pattern_exists(self, data_array: list) -> list[int] | None:
         """Checks if pattern exist in passed array.
         Returns a list with found pattern indexes, or None if no pattern has been found"""
         if len(data_array) < len(self.pattern):
             return None
-        
+
         found_indexes = self._kmp.search(data_array, self.pattern)
         if len(found_indexes) == 0:
             return None
 
         return found_indexes
 
+    def _get_data_from_internal_buffer(
+        self, start_index: int, end_index: int
+    ) -> bytearray:
+        real_end_index = end_index + (
+            len(self.pattern) if self.return_data_with_pattern else 0
+        )
+        data = self._new_data_buffer.data[start_index:real_end_index].copy()
+        return bytearray(data)

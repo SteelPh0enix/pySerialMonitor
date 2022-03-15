@@ -45,8 +45,8 @@ class KMPTests(unittest.TestCase):
         expected_2 = [8, 9]
 
         self.assertListEqual(kmp.search(dataset_2, pattern_2), expected_2)
-        
-        #                   012345678 90123 4 567890123 456789012   3   4   5 6 7 89012 
+
+        #                   012345678 90123 4 567890123 456789012   3   4   5 6 7 89012
         newline_pattern = b"testtest\ntest\r\nalsotest\rmoredata\x22\x33\x44\n\r\ndadad"
         newline_n = b"\n"
         newline_r = b"\r"
@@ -60,5 +60,9 @@ class KMPTests(unittest.TestCase):
 
         self.assertListEqual(kmp.search(newline_pattern, newline_n), newline_n_expected)
         self.assertListEqual(kmp.search(newline_pattern, newline_r), newline_r_expected)
-        self.assertListEqual(kmp.search(newline_pattern, newline_nr), newline_nr_expected)
-        self.assertListEqual(kmp.search(newline_pattern, newline_rn), newline_rn_expected)
+        self.assertListEqual(
+            kmp.search(newline_pattern, newline_nr), newline_nr_expected
+        )
+        self.assertListEqual(
+            kmp.search(newline_pattern, newline_rn), newline_rn_expected
+        )
